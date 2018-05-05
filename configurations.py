@@ -4,13 +4,14 @@ def getwelcomemessage():
     file_path = os.path.dirname(os.path.realpath(__file__)) + "/config.json"
     print("trying to open file: " + file_path)
     with open(file_path) as file:
+        message = "Welcome, If you need me just say Hello Google or Hey Google"
         try:
             data = json.load(file)
             message = data["startupmessage"]
             print("Startup Message: " + message)
         except Exception as error:
             print("There was an error reading configuration file\n" + error)
-            return "Welcome, If you need me just say Hello Google or Hey Google"
+        return message
 
 def main():
     print(getwelcomemessage())
