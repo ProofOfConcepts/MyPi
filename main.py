@@ -59,7 +59,7 @@ def process_event(event, device_id):
         device_id(str): The device ID of the new instance.
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        playWavFile(configData["listeningaudiofile"])
+        playWavFile(dir_path + configData["listeningaudiofile"])
         print("I am here...")
 
     print(event)
