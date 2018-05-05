@@ -148,6 +148,8 @@ def main():
             register_device(args.project_id, credentials,
                             args.device_model_id, assistant.device_id)
 
+        #indicate that we are ready now...
+        playWavFile(dir_path + configData["hotwordwaitingaudiofile"])
         for event in events:
             process_event(event, assistant.device_id)
 

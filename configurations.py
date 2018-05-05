@@ -8,7 +8,8 @@ def getconfigs():
         sayfilename = "/tmp/words.mp3"
         startupaudiofile = "/assets/startup.wav"
         listeningaudiofile = "/assets/listening.wav"
-        data = {"startupmessage" : message, "sayfilename" : sayfilename, "startupaudiofile" : startupaudiofile, "listeningaudiofile" : listeningaudiofile}
+        hotwordwaitingaudiofile = "/assets/waiting-hotword.wav"
+        data = {"startupmessage" : message, "sayfilename" : sayfilename, "startupaudiofile" : startupaudiofile, "listeningaudiofile" : listeningaudiofile, "hotwordwaitingaudiofile" : hotwordwaitingaudiofile}
         try:
             data = json.load(file)
         except Exception as error:

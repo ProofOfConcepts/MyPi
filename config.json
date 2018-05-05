@@ -2,5 +2,6 @@
     "startupmessage": "Welcome, I am your personal assistant. If you need me just say Hello Google or you can say Hey Google and I will be right there at your service!",
     "sayfilename": "/tmp/words.mp3",
     "startupaudiofile": "/assets/startup.wav",
-    "listeningaudiofile": "/assets/listening.wav"
+    "listeningaudiofile": "/assets/listening.wav",
+    "hotwordwaitingaudiofile": "/assets/waiting-hotword.wav"
 }
