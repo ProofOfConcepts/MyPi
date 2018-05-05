@@ -2,6 +2,7 @@ import json
 import os
 def getwelcomemessage():
     file_path = os.path.dirname(os.path.realpath(__file__)) + "/config.json"
+    print("trying to open file: " + file_path)
     with open(file_path) as file:
         try:
             return json.load(file)["startupmessage"]
