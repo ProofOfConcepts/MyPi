@@ -1,6 +1,6 @@
-import logging
 from __future__ import print_function
 
+import logging
 import argparse
 import os.path
 import json
