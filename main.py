@@ -19,7 +19,8 @@ from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
 from conversation import say
-from configurations import getwelcomemessage
+from conversation import playWavFile
+from configurations import getconfigs
 
 
 DEVICE_API_URL = 'https://embeddedassistant.googleapis.com/v1alpha2'
@@ -30,7 +31,7 @@ logging.basicConfig(filename='/tmp/MyPi.log', level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
 
-welcomemessage = getwelcomemessage()
+configData = getconfigs()
 
 def process_device_actions(event, device_id):
     if 'inputs' in event.args:
@@ -58,7 +59,8 @@ def process_event(event, device_id):
         device_id(str): The device ID of the new instance.
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        print()
+        playWavFile
+        print("I am here...")
 
     print(event)
 
@@ -135,8 +137,8 @@ def main():
 
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
-        subprocess.Popen(["aplay", dir_path + "/assets/startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        say(welcomemessage, "/tmp/words.mp3")
+        playWavFile(dir_path + configData["startupaudiofile"])
+        say(configData["startupmessage"], configData["sayfilename"])
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +

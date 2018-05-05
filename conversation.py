@@ -3,6 +3,7 @@
 from gtts import gTTS
 from googletrans import Translator
 import os
+import subprocess
 
 translator = Translator()
 language = "en"
@@ -16,5 +17,11 @@ def say(words, ttsfilename):
     print(words)
     tts = gTTS(text=words, lang=language)
     tts.save(ttsfilename)
-    os.system("mpg123 "+ttsfilename)
+    playMp3File(ttsfilename)
     os.remove(ttsfilename)
+
+def playWavFile(fileName):
+    subprocess.Popen(["aplay", fileName], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+def playMp3File(fileName):
+    os.system("mpg123 " + fileName)
