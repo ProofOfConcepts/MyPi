@@ -47,7 +47,7 @@ def process_device_actions(event, device_id):
                                     else:
                                         yield e['command'], None
     if 'inputs' in event.args:
-        print(event.args['inputs'])
+        print("inputs found!")
 
 
 def process_event(event, device_id):
