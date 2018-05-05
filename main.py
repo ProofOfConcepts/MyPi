@@ -60,13 +60,10 @@ def process_event(event, device_id):
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
     if event.type == EventType.ON_DEVICE_ACTION:
+        print(event)
         for command, params in process_device_actions(event, device_id):
             print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
-            if command == "com.mypi.commands.play_jukebox":
-                number = int(params["number"])
-                location = str(params["locationKey"])
-                actionmessage = "Playing song number " + number + "on jukebox in " + location
-                say(actionmessage, configData[constants.SAY_FILE_KEY])
+            
 
 
 def register_device(project_id, credentials, device_model_id, device_id):
