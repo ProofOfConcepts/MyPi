@@ -136,7 +136,7 @@ def main():
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
         subprocess.Popen(["aplay", dir_path + "/assets/startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        say("", "/tmp/words.mp3")
+        say(welcomemessage, "/tmp/words.mp3")
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +
