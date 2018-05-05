@@ -20,6 +20,8 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
+from conversation import say
+
 
 DEVICE_API_URL = 'https://embeddedassistant.googleapis.com/v1alpha2'
 
@@ -174,6 +176,7 @@ def main():
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
         subprocess.Popen(["aplay", dir_path + "/assets/startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        say("Welcome, I am your personal assistant, if you need me just say Hello Google or you can say Hey Google and I will be right there at your service!", "/tmp/words.mp3")
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +
