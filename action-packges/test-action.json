@@ -1,0 +1,85 @@
+{
+    "manifest": {
+        "displayName": "Play JukeBox Audio",
+        "invocationName": "Play JukeBox Audio",
+        "category": "PRODUCTIVITY"
+    },
+    "actions": [
+        {
+            "name": "com.mypi.actions.play_jukebox",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.mypi.intents.play_jukebox",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "type": "SchemaOrg_Number"
+                    },
+                    {
+                        "name": "location",
+                        "type": "LocationType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "play song number $SchemaOrg_Number:number on juke box in $LocationType:location",
+                        "play song $SchemaOrg_Number:number on juke box in $LocationType:location",
+                        "start song number $SchemaOrg_Number:number on juke box in $LocationType:location",
+                        "start song $SchemaOrg_Number:number on juke box in $LocationType:location",
+                        "on juke box in $LocationType:location play song number $SchemaOrg_Number:number",
+                        "on juke box in $LocationType:location play song $SchemaOrg_Number:number",
+                        "on juke box in $LocationType:location start song number $SchemaOrg_Number:number",
+                        "on juke box in $LocationType:location start song $SchemaOrg_Number:number"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Playing the $number on juke box in $location.raw"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.mypi.commands.play_jukebox",
+                                    "params": {
+                                        "locationKey": "$location",
+                                        "number": "$number"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "types": [
+        {
+            "name": "$LocationType",
+            "entities": [
+                {
+                    "key": "JUKEBOXLOCATION",
+                    "synonyms": [
+                        "bedroom",
+                        "bed room",
+                        "living room",
+                        "livingroom",
+                        "here",
+                        "next room",
+                        "this room"
+                    ]
+                }
+            ]
+        }
+    ]
+}
