@@ -21,17 +21,17 @@ from google.assistant.library.file_helpers import existing_file
 from conversation import say
 from conversation import playWavFile
 from configurations import getconfigs
-
-
-DEVICE_API_URL = 'https://embeddedassistant.googleapis.com/v1alpha2'
+import constants
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-logging.basicConfig(filename='/tmp/MyPi.log', level=logging.DEBUG,
+logging.basicConfig(filename=constants.LOG_FILE, level=constants.LOG_LEVEL,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 logger=logging.getLogger(__name__)
 
 configData = getconfigs()
+
+DEVICE_API_URL = configData[constants.DEVICE_API_URL_KEY]
 
 def process_device_actions(event, device_id):
     if 'inputs' in event.args:
@@ -49,65 +49,43 @@ def process_device_actions(event, device_id):
 
 
 def process_event(event, device_id):
-    """Pretty prints events.
-
-    Prints all events that occur with two spaces between each new
-    conversation and a single space between turns of a conversation.
-
-    Args:
-        event(event.Event): The current event to process.
-        device_id(str): The device ID of the new instance.
-    """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        playWavFile(dir_path + configData["listeningaudiofile"])
-        print("I am here...")
+        playWavFile(dir_path + configData[constants.LISTENING_AUDIO_FILE_KEY])
+        print(constants.CONVERSATION_TURN_STARTED_MESSAGE)
 
     print(event)
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
-            event.args and not event.args['with_follow_on_turn']):
-        playWavFile(dir_path + configData["hotwordwaitingaudiofile"])
-        print("Finished.\nWaiting for hotword...")
+            event.args and not event.args[constants.EVENT_ARGS_WITH_FOLLOW_ON_TURN]):
+        playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
+        print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in process_device_actions(event, device_id):
-            print('Do command', command, 'with params', str(params))
+            print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
 
 
 def register_device(project_id, credentials, device_model_id, device_id):
-    """Register the device if needed.
-
-    Registers a new assistant device if an instance with the given id
-    does not already exists for this model.
-
-    Args:
-       project_id(str): The project ID used to register device instance.
-       credentials(google.oauth2.credentials.Credentials): The Google
-                OAuth2 credentials of the user to associate the device
-                instance with.
-       device_model_id(str): The registered device model ID.
-       device_id(str): The device ID of the new instance.
-    """
     base_url = '/'.join([DEVICE_API_URL, 'projects', project_id, 'devices'])
     device_url = '/'.join([base_url, device_id])
     session = google.auth.transport.requests.AuthorizedSession(credentials)
     r = session.get(device_url)
     print(device_url, r.status_code)
     if r.status_code == 404:
-        print('Registering....')
+        print(constants.REGISTERING_MESSAGE)
         r = session.post(base_url, data=json.dumps({
             'id': device_id,
             'model_id': device_model_id,
-            'client_type': 'SDK_LIBRARY'
+            'client_type': constants.CLIENT_TYPE
         }))
         if r.status_code != 200:
-            raise Exception('failed to register device: ' + r.text)
-        print('\rDevice registered.')
+            raise Exception(constants.REGISTRATION_FAILED_MESSAGE + r.text)
+        print(constants.REGISTRATION_DONE_MESSAGE)
 
 
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument('--credentials', type=existing_file,
+    parser.add_argument(constants.CREDENTIALS_ARG, type=existing_file,
                         metavar='OAUTH2_CREDENTIALS_FILE',
                         default=os.path.join(
                             os.path.expanduser('~/.config'),
@@ -115,11 +93,11 @@ def main():
                             'credentials.json'
                         ),
                         help='Path to store and read OAuth2 credentials')
-    parser.add_argument('--device_model_id', type=str,
+    parser.add_argument(constants.DEVICE_MODEL_ARG, type=str,
                         metavar='DEVICE_MODEL_ID', required=True,
                         help='The device model ID registered with Google')
     parser.add_argument(
-        '--project_id',
+        constants.PROJECT_ARG,
         type=str,
         metavar='PROJECT_ID',
         required=False,
@@ -138,8 +116,8 @@ def main():
 
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
-        playWavFile(dir_path + configData["startupaudiofile"])
-        say(configData["startupmessage"], configData["sayfilename"])
+        playWavFile(dir_path + configData[constants.STARTUP_AUDIO_FILE_KEY])
+        say(configData[constants.STARTUP_MESSAGE_KEY], configData[constants.SAY_FILE_KEY])
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +
@@ -150,7 +128,7 @@ def main():
                             args.device_model_id, assistant.device_id)
 
         #indicate that we are ready now...
-        playWavFile(dir_path + configData["hotwordwaitingaudiofile"])
+        playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         for event in events:
             process_event(event, assistant.device_id)
 

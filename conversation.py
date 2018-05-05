@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!usr/bin/env python  
+#coding=utf-8  
 
 from gtts import gTTS
 from googletrans import Translator
@@ -7,7 +8,6 @@ import subprocess
 
 translator = Translator()
 language = "en"
-speechfilename = "/tmp/words.mp3"
 
 def say(words, ttsfilename):
     words= translator.translate(words, dest=language)
