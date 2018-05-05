@@ -46,6 +46,7 @@ def process_device_actions(event, device_id):
                                         yield e['command'], e['params']
                                     else:
                                         yield e['command'], None
+    print(event)
 
 
 def process_event(event, device_id):
