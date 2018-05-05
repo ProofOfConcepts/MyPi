@@ -5,7 +5,9 @@ def getwelcomemessage():
     print("trying to open file: " + file_path)
     with open(file_path) as file:
         try:
-            return json.load(file)["startupmessage"]
+            data = json.load(file)
+            message = data["startupmessage"]
+            print("Startup Message: " + message)
         except Exception as error:
             print("There was an error reading configuration file\n" + error)
             return "Welcome, If you need me just say Hello Google or Hey Google"
