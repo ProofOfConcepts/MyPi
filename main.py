@@ -66,7 +66,8 @@ def process_event(event, device_id):
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args['with_follow_on_turn']):
-        print()
+        playWavFile(dir_path + configData["hotwordwaitingaudiofile"])
+        print("Finished.\nWaiting for hotword...")
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in process_device_actions(event, device_id):
             print('Do command', command, 'with params', str(params))
