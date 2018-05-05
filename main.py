@@ -11,6 +11,7 @@ import pyaudio
 import wave  
 import sys
 import os 
+import subprocess
 
 import google.auth.transport.requests
 import google.oauth2.credentials
@@ -172,7 +173,7 @@ def main():
 
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
-        play_wav(dir_path + "/assets/startup.wav")
+        subprocess.Popen(["aplay", dir_path + "/assets/startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +
