@@ -1,12 +1,12 @@
 {
     "manifest": {
-        "displayName": "Play JukeBox Audio",
-        "invocationName": "Play JukeBox Audio",
+        "displayName": "Blinky light",
+        "invocationName": "Blinky light",
         "category": "PRODUCTIVITY"
     },
     "actions": [
         {
-            "name": "com.mypi.actions.play_jukebox",
+            "name": "com.acme.actions.blink_light",
             "availability": {
                 "deviceClasses": [
                     {
@@ -15,27 +15,20 @@
                 ]
             },
             "intent": {
-                "name": "com.mypi.intents.play_jukebox",
+                "name": "com.acme.intents.blink_light",
                 "parameters": [
                     {
                         "name": "number",
                         "type": "SchemaOrg_Number"
                     },
                     {
-                        "name": "location",
-                        "type": "LocationType"
+                        "name": "light_target",
+                        "type": "LightType"
                     }
                 ],
                 "trigger": {
                     "queryPatterns": [
-                        "play song number $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "play song $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "start song number $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "start song $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "on juke box in $LocationType:location play song number $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location play song $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location start song number $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location start song $SchemaOrg_Number:number"
+                        "blink the $LightType:light_target $SchemaOrg_Number:number times"
                     ]
                 }
             },
@@ -45,14 +38,14 @@
                         "items": [
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": "Playing the $number on juke box in $location.raw"
+                                    "textToSpeech": "Blinking the $light_target.raw $number times"
                                 }
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.mypi.commands.play_jukebox",
+                                    "command": "com.acme.commands.blink_light",
                                     "params": {
-                                        "locationKey": "$location",
+                                        "lightKey": "$light_target",
                                         "number": "$number"
                                     }
                                 }
@@ -65,18 +58,15 @@
     ],
     "types": [
         {
-            "name": "$LocationType",
+            "name": "$LightType",
             "entities": [
                 {
-                    "key": "JUKEBOXLOCATION",
+                    "key": "LIGHT",
                     "synonyms": [
-                        "bedroom",
-                        "bed room",
-                        "living room",
-                        "livingroom",
-                        "here",
-                        "next room",
-                        "this room"
+                        "LED",
+                        "light",
+                        "bulb",
+                        "light bulb"
                     ]
                 }
             ]
