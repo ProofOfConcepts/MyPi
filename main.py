@@ -134,7 +134,7 @@ def main():
         #indicate that we are ready now...
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         for event in events:
-            print("processing event: " + event)
+            print("processing event: " + str(event))
             process_event(event, assistant.device_id)
 
 if __name__ == '__main__':
