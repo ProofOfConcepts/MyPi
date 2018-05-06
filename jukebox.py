@@ -30,7 +30,7 @@ class JukeBoxRequest:
                     data = self.getPlayerRequestData(3, -1)
                     self.postData(url,data)
 
-                    
+
     def jukeBoxConversationStarted(self):
         for jukebox in self.data["jukeboxes"]:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY]
@@ -44,16 +44,16 @@ class JukeBoxRequest:
     def getData(self, url):
         print("getting from: " + url)
         headers = {"Content-Type" : "application/json"}
-        response = json.load(requests.get(url, headers=headers))
-        print(response)
-        return response
+        response = requests.get(url, headers=headers)
+        print(response.text)
+        return response.text
 
     def postData(self, url, data):
         print("posting to: " + url)
         headers = {"Content-Type" : "application/json"}
-        response = json.load(requests.post(url, data=json.dumps(data), headers=headers))
-        print(response)
-        return response
+        response = requests.post(url, data=json.dumps(data), headers=headers)
+        print(response.text)
+        return response.text
 
     def playSong(self, songNumber, url):
         data = self.getPlayerRequestData(0, songNumber)
