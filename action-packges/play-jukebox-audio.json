@@ -105,6 +105,54 @@
                     }
                 }
             }
+        },
+        {
+            "name": "com.acme.actions.pause_jukebox",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.acme.intents.pause_jukebox",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "LocationType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "jukebox pause in $LocationType:location",
+                        "in $LocationType:location pause jukebox",
+                        "jukebox pause at $LocationType:location",
+                        "at $LocationType:location jukebox pause"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "paused jukebox in $location.raw"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.acme.commands.pause_jukebox",
+                                    "params": {
+                                        "locationkey": "$location"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
         }
     ],
     "types": [
