@@ -11,10 +11,18 @@ class JukeBoxRequest:
     def handleJukeBoxRequest(self, songnumber, host):
         print("song number: " + songnumber + " , location: " + host)
         for jukebox in self.data["jukeboxes"]:
-            print("checking host: " + jukebox["name"])
             if jukebox["name"] == host:
-                print("playing sonng on host: " + host)
+                print("host found...\nplaying song on host: " + host)
+                self.playSong(songnumber, url= jukebox["host"] + self.data["playerrequestendpoint"])
 
+    def playSong(self, songNumber, url):
+        data = '''
+            {
+	            "RequestType": 0,
+	            "Identifier": ''' + songNumber
+        '''}'''
+        response = requests.post(url, data=data)
+        print(str(response))
 
     def __init__(self):
         file_path = os.path.dirname(os.path.realpath(__file__)) + "/jukebox-config.json"
