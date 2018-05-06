@@ -36,8 +36,27 @@
                         "jukebox $StepIntervals:step volume $VolumeOperations:operation in $LocationType:location",
                         "in $LocationType:location jukebox $VolumeOperations:operation volume $StepIntervals:step",
                         "in $LocationType:location jukebox $StepIntervals:step volume $VolumeOperations:operation",
+                        "in $LocationType:location song $VolumeOperations:operation volume $StepIntervals:step",
+                        "in $LocationType:location song $StepIntervals:step volume $VolumeOperations:operation",
+                        "in $LocationType:location music $VolumeOperations:operation volume $StepIntervals:step",
+                        "in $LocationType:location music $StepIntervals:step volume $VolumeOperations:operation",
                         "jukebox volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
-                        "in $LocationType:location jukebox volume $VolumeOperations:operation $StepIntervals:step"
+                        "jukebox volume $VolumeOperations:operation by $StepIntervals:step in $LocationType:location",
+                        "music volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
+                        "music volume $VolumeOperations:operation by $StepIntervals:step in $LocationType:location",
+                        "music volume $StepIntervals:step $VolumeOperations:operation in $LocationType:location",
+                        "playback volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
+                        "playback volume $VolumeOperations:operation by $StepIntervals:step in $LocationType:location",
+                        "playback volume $StepIntervals:step $VolumeOperations:operation in $LocationType:location",
+                        "song volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
+                        "song volume $VolumeOperations:operation by $StepIntervals:step in $LocationType:location",
+                        "song volume $StepIntervals:step $VolumeOperations:operation in $LocationType:location",
+                        "in $LocationType:location jukebox volume $VolumeOperations:operation $StepIntervals:step",
+                        "in $LocationType:location jukebox volume $VolumeOperations:operation by $StepIntervals:step",
+                        "in $LocationType:location song volume $VolumeOperations:operation $StepIntervals:step",
+                        "in $LocationType:location song volume $VolumeOperations:operation by $StepIntervals:step",
+                        "in $LocationType:location music volume $VolumeOperations:operation $StepIntervals:step",
+                        "in $LocationType:location music volume $VolumeOperations:operation by $StepIntervals:step"
                     ]
                 }
             },
