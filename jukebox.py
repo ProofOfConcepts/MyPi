@@ -17,11 +17,10 @@ class JukeBoxRequest:
 
     def playSong(self, songNumber, url):
         print("posting to: " + url)
-        data = '''
-            {
-	            "RequestType": 0,
-	            "Identifier": ''' + songNumber
-        '''}'''
+        data = {
+            "RequestType":0,
+            "Identifier":songNumber
+        }
         headers = {"Content-Type" : "application/json"}
         response = requests.post(url, data=data, headers=headers)
         print(response)
