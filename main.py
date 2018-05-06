@@ -18,7 +18,7 @@ from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
-from conversation import say
+from conversation import sayAssistant
 from conversation import playWavFile
 from configurations import getconfigs
 import constants
@@ -127,7 +127,7 @@ def main():
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
         playWavFile(dir_path + configData[constants.STARTUP_AUDIO_FILE_KEY])
-        say(configData[constants.STARTUP_MESSAGE_KEY], configData[constants.SAY_FILE_KEY])
+        sayAssistant(configData[constants.STARTUP_MESSAGE_KEY], configData[constants.SAY_FILE_KEY])
         events = assistant.start()
 
         print('device_model_id:', args.device_model_id + '\n' +
