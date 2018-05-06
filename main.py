@@ -129,7 +129,7 @@ def main():
         playWavFile(dir_path + configData[constants.STARTUP_AUDIO_FILE_KEY])
         
         events = assistant.start()
-        sayAssistant(configData[constants.STARTUP_MESSAGE_KEY], assistant)
+        sayAssistant(assistant, configData[constants.STARTUP_MESSAGE_KEY])
 
         print('device_model_id:', args.device_model_id + '\n' +
               'device_id:', assistant.device_id + '\n')
