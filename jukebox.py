@@ -20,13 +20,13 @@ class JukeBoxRequest:
             if jukebox["name"] == host:
                 print("host found...\nstopping on host: " + host)
                 url= jukebox["host"] + self.data[constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY]
-                if requestType == "com.acme.commands.stop_jukebox":
+                if requestType == constants.JUKEBOXES_STOP_COMMAND:
                     data = self.getPlayerRequestData(2, -1)
                     self.postData(url, data)
-                if requestType == "com.acme.commands.pause_jukebox":
+                if requestType == constants.JUKEBOXES_PAUSE_COMMAND:
                     data = self.getPlayerRequestData(1, -1)
                     self.postData(url, data)
-                if requestType == "com.acme.commands.resume_jukebox":
+                if requestType == constants.JUKEBOXES_RESUME_COMMAND:
                     data = self.getPlayerRequestData(3, -1)
                     self.postData(url,data)
 

@@ -19,10 +19,12 @@ from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 
 from conversation import say
+from conversation import conversationStarted
+from conversation import conversationFinished
+from conversation import processCommand
 from conversation import playWavFile
 from configurations import getconfigs
 import constants
-from jukebox import JukeBoxRequest
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -34,7 +36,6 @@ configData = getconfigs()
 
 DEVICE_API_URL = configData[constants.DEVICE_API_URL_KEY]
 
-myJukeBox = JukeBoxRequest()
 
 def process_device_actions(event, device_id):
     if 'inputs' in event.args:
@@ -53,25 +54,17 @@ def process_device_actions(event, device_id):
 
 def process_event(event, device_id):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        myJukeBox.jukeBoxConversationStarted()
-        playWavFile(dir_path + configData[constants.LISTENING_AUDIO_FILE_KEY])
-        print(constants.CONVERSATION_TURN_STARTED_MESSAGE)
+        conversationStarted(dir_path + configData[constants.LISTENING_AUDIO_FILE_KEY])
 
     print(event)
 
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args[constants.EVENT_ARGS_WITH_FOLLOW_ON_TURN]):
-        playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
-        myJukeBox.jukeBoxConversationFinished()
-        print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
+        conversationFinished(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
     
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in process_device_actions(event, device_id):
-            print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
-            if command == "com.acme.commands.play_jukebox":
-                myJukeBox.jukeBoxPlayRequest(params["number"], params["locationkey"])
-            if command == "com.acme.commands.stop_jukebox" or command == "com.acme.commands.pause_jukebox":
-                myJukeBox.jukeBoxOtherRequest(command, params["locationkey"])
+            processCommand(command, params)
 
 
 def register_device(project_id, credentials, device_model_id, device_id):

@@ -6,7 +6,7 @@
     },
     "actions": [
         {
-            "name": "com.acme.actions.play_jukebox",
+            "name": "com.mypi.action.play_jukebox",
             "availability": {
                 "deviceClasses": [
                     {
@@ -15,7 +15,7 @@
                 ]
             },
             "intent": {
-                "name": "com.acme.intents.play_jukebox",
+                "name": "com.mypi.intents.play_jukebox",
                 "parameters": [
                     {
                         "name": "number",
@@ -46,7 +46,7 @@
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.acme.commands.play_jukebox",
+                                    "command": "com.mypi.commands.play_jukebox",
                                     "params": {
                                         "number": "$number",
                                         "locationkey": "$location"
@@ -59,7 +59,7 @@
             }
         },
         {
-            "name": "com.acme.actions.stop_jukebox",
+            "name": "com.mypi.action.stop_jukebox",
             "availability": {
                 "deviceClasses": [
                     {
@@ -68,7 +68,7 @@
                 ]
             },
             "intent": {
-                "name": "com.acme.intents.stop_jukebox",
+                "name": "com.mypi.intents.stop_jukebox",
                 "parameters": [
                     {
                         "name": "location",
@@ -95,7 +95,7 @@
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.acme.commands.stop_jukebox",
+                                    "command": "com.mypi.commands.stop_jukebox",
                                     "params": {
                                         "locationkey": "$location"
                                     }
@@ -107,7 +107,7 @@
             }
         },
         {
-            "name": "com.acme.actions.pause_jukebox",
+            "name": "com.mypi.action.pause_jukebox",
             "availability": {
                 "deviceClasses": [
                     {
@@ -116,7 +116,7 @@
                 ]
             },
             "intent": {
-                "name": "com.acme.intents.pause_jukebox",
+                "name": "com.mypi.intents.pause_jukebox",
                 "parameters": [
                     {
                         "name": "location",
@@ -143,7 +143,7 @@
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.acme.commands.pause_jukebox",
+                                    "command": "com.mypi.commands.pause_jukebox",
                                     "params": {
                                         "locationkey": "$location"
                                     }
@@ -155,7 +155,7 @@
             }
         },
         {
-            "name": "com.acme.actions.resume_jukebox",
+            "name": "com.mypi.action.resume_jukebox",
             "availability": {
                 "deviceClasses": [
                     {
@@ -164,7 +164,7 @@
                 ]
             },
             "intent": {
-                "name": "com.acme.intents.resume_jukebox",
+                "name": "com.mypi.intents.resume_jukebox",
                 "parameters": [
                     {
                         "name": "location",
@@ -191,7 +191,7 @@
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.acme.commands.resume_jukebox",
+                                    "command": "com.mypi.commands.resume_jukebox",
                                     "params": {
                                         "locationkey": "$location"
                                     }

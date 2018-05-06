@@ -20,6 +20,10 @@ JUKEBOXES_HOST_KEY = "host"
 JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY = "playerrequestendpoint"
 JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY = "conversationstartedendpoint"
 JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY = "conversationfinishedendpoint"
+JUKEBOXES_PLAY_COMMAND = "com.mypi.commands.play_jukebox"
+JUKEBOXES_PAUSE_COMMAND = "com.mypi.commands.pause_jukebox"
+JUKEBOXES_RESUME_COMMAND = "com.mypi.commands.resume_jukebox"
+JUKEBOXES_STOP_COMMAND = "com.mypi.commands.stop_jukebox"
 
 
 CONVERSATION_TURN_STARTED_MESSAGE = "I am here..."
