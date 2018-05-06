@@ -127,8 +127,9 @@ def main():
     with Assistant(credentials, args.device_model_id) as assistant:
         # Play intro audio
         playWavFile(dir_path + configData[constants.STARTUP_AUDIO_FILE_KEY])
-        sayAssistant(configData[constants.STARTUP_MESSAGE_KEY], configData[constants.SAY_FILE_KEY])
+        
         events = assistant.start()
+        sayAssistant(configData[constants.STARTUP_MESSAGE_KEY], assistant)
 
         print('device_model_id:', args.device_model_id + '\n' +
               'device_id:', assistant.device_id + '\n')
