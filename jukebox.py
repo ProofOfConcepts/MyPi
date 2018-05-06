@@ -39,7 +39,7 @@ class JukeBoxRequest:
         for jukebox in self.data["jukeboxes"]:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
             self.getData(url)
-
+            
     def getData(self, url):
         print("getting from: " + url)
         headers = {"Content-Type" : "application/json"}
