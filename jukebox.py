@@ -16,13 +16,14 @@ class JukeBoxRequest:
                 self.playSong(songnumber, url= jukebox["host"] + self.data["playerrequestendpoint"])
 
     def playSong(self, songNumber, url):
+        print("posting to: " + url)
         data = '''
             {
 	            "RequestType": 0,
 	            "Identifier": ''' + songNumber
         '''}'''
         response = requests.post(url, data=data)
-        print(str(response))
+        print(response)
 
     def __init__(self):
         file_path = os.path.dirname(os.path.realpath(__file__)) + "/jukebox-config.json"
