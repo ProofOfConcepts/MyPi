@@ -45,5 +45,5 @@ def processCommand(command, params):
         myJukeBox.jukeBoxPlayRequest(params["number"], params["locationkey"])
     if command == constants.JUKEBOXES_STOP_COMMAND or command == constants.JUKEBOXES_PAUSE_COMMAND or command == constants.JUKEBOXES_RESUME_COMMAND:
         myJukeBox.jukeBoxOtherRequest(command, params["locationkey"])
-    if command = constants.JUKEBOXES_VOLUME_COMMAND:
+    if command == constants.JUKEBOXES_VOLUME_COMMAND:
         print("Adjusting Volume...")
