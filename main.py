@@ -139,6 +139,7 @@ def main():
 
             process_event(event, assistant.device_id)
             cmd = event.args
+            print("args: " + str(cmd))
             if "name".lower() in str(cmd).lower():
                 assistant.stop_conversation()
                 say("You don't know my name", configData[constants.SAY_FILE_KEY])
