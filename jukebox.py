@@ -13,13 +13,13 @@ class JukeBoxRequest:
         for jukebox in self.data["jukeboxes"]:
             if jukebox["name"] == host:
                 print("host found...\nplaying song on host: " + host)
-                self.playSong(songnumber, url= jukebox["host"] + self.data["playerrequestendpoint"])
+                self.playSong(songnumber, url= jukebox["host"] + self.data[constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY])
 
     def jukeBoxOtherRequest(self, requestType, host):
         for jukebox in self.data["jukeboxes"]:
             if jukebox["name"] == host:
                 print("host found...\nstopping on host: " + host)
-                url= jukebox["host"] + self.data["playerrequestendpoint"]
+                url= jukebox["host"] + self.data[constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY]
                 if requestType == "com.acme.commands.stop_jukebox":
                     data = self.getPlayerRequestData(2, -1)
                     self.postData(url, data)
@@ -30,11 +30,29 @@ class JukeBoxRequest:
                     data = self.getPlayerRequestData(3, -1)
                     self.postData(url,data)
     
+    def jukeBoxConversationStarted(self):
+        for jukebox in self.data["jukeboxes"]:
+            url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY]
+            self.getData(url)
+
+    def jukeBoxConversationFinished(self):
+        for jukebox in self.data["jukeboxes"]:
+            url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
+            self.getData(url)
+
+    def getData(self, url):
+        print("getting from: " + url)
+        headers = {"Content-Type" : "application/json"}
+        response = json.load(requests.get(url, headers=headers))
+        print(response)
+        return response
+
     def postData(self, url, data):
         print("posting to: " + url)
         headers = {"Content-Type" : "application/json"}
-        response = requests.post(url, data=json.dumps(data), headers=headers)
+        response = json.load(requests.post(url, data=json.dumps(data), headers=headers))
         print(response)
+        return response
 
     def playSong(self, songNumber, url):
         data = self.getPlayerRequestData(0, songNumber)
@@ -63,7 +81,9 @@ class JukeBoxRequest:
                         constants.JUKEBOXES_HOST_KEY : "http://192.168.1.200:5000"
                     }
                 ],
-                constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY : "/api/Player/Request"
+                constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY : "/api/Player/Request",
+                constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY : "/api/Player/ConversationStarted",
+                constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY : "/api/Player/ConversationFinished"
             }
             try:
                 data = json.load(file)

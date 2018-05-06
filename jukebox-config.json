@@ -11,5 +11,7 @@
             "host" : "http://192.168.1.200:5000"
         }
     ],
-    "playerrequestendpoint" : "/api/Player/Request"
+    "playerrequestendpoint" : "/api/Player/Request",
+    "conversationstartedendpoint" : "/api/Player/ConversationStarted",
+    "conversationfinishedendpoint" : "/api/Player/ConversationFinished"
 }

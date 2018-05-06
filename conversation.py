@@ -25,3 +25,6 @@ def playWavFile(fileName):
 
 def playMp3File(fileName):
     os.system("mpg123 " + fileName)
+
+def conversationStarted():
+    
