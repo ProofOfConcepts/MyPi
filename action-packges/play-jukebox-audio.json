@@ -61,15 +61,21 @@
             "name": "$LocationType",
             "entities": [
                 {
-                    "key": "JUKEBOXLOCATION",
+                    "key": "zero",
                     "synonyms": [
                         "bedroom",
                         "bed room",
+                        "here",
+                        "this room"
+                    ]
+                },
+                {
+                    "key": "one",
+                    "synonyms": [
                         "living room",
                         "livingroom",
-                        "here",
-                        "next room",
-                        "this room"
+                        "there",
+                        "next room"
                     ]
                 }
             ]

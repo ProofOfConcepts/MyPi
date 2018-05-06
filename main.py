@@ -22,6 +22,7 @@ from conversation import say
 from conversation import playWavFile
 from configurations import getconfigs
 import constants
+from jukebox import JukeBoxRequest
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -32,6 +33,8 @@ logger=logging.getLogger(__name__)
 configData = getconfigs()
 
 DEVICE_API_URL = configData[constants.DEVICE_API_URL_KEY]
+
+myJukeBox = JukeBoxRequest()
 
 def process_device_actions(event, device_id):
     if 'inputs' in event.args:
@@ -63,6 +66,8 @@ def process_event(event, device_id):
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in process_device_actions(event, device_id):
             print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
+            if command == "com.acme.commands.play_jukebox":
+                myJukeBox.handleJukeBoxRequest(params["number"], params["locationkey"])
 
 
 def register_device(project_id, credentials, device_model_id, device_id):

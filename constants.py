@@ -13,6 +13,12 @@ HOTWORD_WAITING_AUDIO_FILE_KEY = "hotwordwaitingaudiofile"
 STARTUP_AUDIO_FILE_KEY = "startupaudiofile"
 SAY_FILE_KEY = "sayfilename"
 
+JUKEBOXES_KEY = "jukeboxes"
+JUKEBOXES_NAMES_KEY = "name"
+JUKEBOXES_ISDEFAULT_KEY = "isdefault"
+JUKEBOXES_HOST_KEY = "host"
+JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY = "playerrequestendpoint"
+
 
 CONVERSATION_TURN_STARTED_MESSAGE = "I am here..."
 CONVERSATION_TURN_FINISHED_MESSAGE = "Finished.\nWaiting for hotword..."
