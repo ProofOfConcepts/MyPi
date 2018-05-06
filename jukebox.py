@@ -29,7 +29,8 @@ class JukeBoxRequest:
                 if requestType == "com.acme.commands.resume_jukebox":
                     data = self.getPlayerRequestData(3, -1)
                     self.postData(url,data)
-    
+
+                    
     def jukeBoxConversationStarted(self):
         for jukebox in self.data["jukeboxes"]:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY]
@@ -39,7 +40,7 @@ class JukeBoxRequest:
         for jukebox in self.data["jukeboxes"]:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
             self.getData(url)
-            
+
     def getData(self, url):
         print("getting from: " + url)
         headers = {"Content-Type" : "application/json"}
