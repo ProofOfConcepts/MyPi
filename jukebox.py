@@ -22,7 +22,8 @@ class JukeBoxRequest:
 	            "RequestType": 0,
 	            "Identifier": ''' + songNumber
         '''}'''
-        response = requests.post(url, data=data)
+        headers = {"Content-Type" : "application/json"}
+        response = requests.post(url, data=data, headers=headers)
         print(response)
 
     def __init__(self):
