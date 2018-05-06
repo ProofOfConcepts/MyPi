@@ -28,7 +28,10 @@
                 ],
                 "trigger": {
                     "queryPatterns": [
-                        "jukebox song number $SchemaOrg_Number:number in $LocationType:location"
+                        "jukebox song number $SchemaOrg_Number:number in $LocationType:location",
+                        "in $LocationType:location jukebox song number $SchemaOrg_Number:number",
+                        "jukebox song $SchemaOrg_Number:number in $LocationType:location",
+                        "in $LocationType:location jukebox song $SchemaOrg_Number:number"
                     ]
                 }
             },
@@ -46,6 +49,54 @@
                                     "command": "com.acme.commands.play_jukebox",
                                     "params": {
                                         "number": "$number",
+                                        "locationkey": "$location"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "com.acme.actions.stop_jukebox",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.acme.intents.stop_jukebox",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "LocationType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "jukebox stop in $LocationType:location",
+                        "in $LocationType:location stop jukebox",
+                        "jukebox stop at $LocationType:location",
+                        "at $LocationType:location jukebox stop"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "stopping jukebox in $location.raw"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.acme.commands.stop_jukebox",
+                                    "params": {
                                         "locationkey": "$location"
                                     }
                                 }

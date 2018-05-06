@@ -67,7 +67,9 @@ def process_event(event, device_id):
         for command, params in process_device_actions(event, device_id):
             print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
             if command == "com.acme.commands.play_jukebox":
-                myJukeBox.handleJukeBoxRequest(params["number"], params["locationkey"])
+                myJukeBox.jukeBoxPlayRequest(params["number"], params["locationkey"])
+            if command == "com.acme.commands.stop_jukebox":
+                myJukeBox.jukeBoxOtherRequest(command, params["locationkey"])
 
 
 def register_device(project_id, credentials, device_model_id, device_id):
