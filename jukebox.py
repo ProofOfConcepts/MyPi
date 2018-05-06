@@ -58,7 +58,7 @@ class JukeBoxRequest:
                 if operation == constants.JUKEBOXES_VOLUMEDOWN_OPERATION:
                     step = step * -1
                 data = self.getPlayerControlRequestData(5, step)
-                print("sending data:\n" + data)
+                print("sending data:\n" + str(data))
                 response = self.postData(url, data)
                 print(response)
     
