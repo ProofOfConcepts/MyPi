@@ -10,6 +10,10 @@ class JukeBoxRequest:
 
     def handleJukeBoxRequest(self, songnumber, host):
         print("song number: " + songnumber + " , location: " + host)
+        for jukebox in self.data["jukeboxes"]:
+            print("checking host: " + jukebox["name"])
+            if jukebox["name"] == host:
+                print("playing sonng on host: " + host)
 
 
     def __init__(self):
