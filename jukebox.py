@@ -9,7 +9,7 @@ import constants
 class JukeBoxRequest:
 
     def handleJukeBoxRequest(self, songnumber, host):
-        print("song number: {songnumber} , location: {host}")
+        print("song number: " + songnumber + " , location: " + host)
 
 
     def __init__(self):
