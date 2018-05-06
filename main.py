@@ -61,14 +61,11 @@ def process_event(event, device_id):
             event.args and not event.args[constants.EVENT_ARGS_WITH_FOLLOW_ON_TURN]):
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
+    
     if event.type == EventType.ON_DEVICE_ACTION:
         print(event.type)
         for command, params in process_device_actions(event, device_id):
             print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
-            if command == "com.acme.commands.blink_light":
-                number = int( params['number'] )
-                for i in range(int(number)):
-                    print('Device is blinking: ' + i)
 
 
 def register_device(project_id, credentials, device_model_id, device_id):
@@ -137,8 +134,7 @@ def main():
         #indicate that we are ready now...
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         for event in events:
-            print(event)
-            print(event.args)
+            print("processing event: " + event)
             process_event(event, assistant.device_id)
 
 if __name__ == '__main__':
