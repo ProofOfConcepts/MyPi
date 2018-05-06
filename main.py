@@ -46,8 +46,6 @@ def process_device_actions(event, device_id):
                                         yield e['command'], e['params']
                                     else:
                                         yield e['command'], None
-    if 'inputs' in event.args:
-        print("inputs found!")
 
 
 def process_event(event, device_id):
@@ -63,7 +61,6 @@ def process_event(event, device_id):
         print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
     
     if event.type == EventType.ON_DEVICE_ACTION:
-        print(event.type)
         for command, params in process_device_actions(event, device_id):
             print(constants.DO_COMMAND_MESSAGE, command, constants.WITH_PARAMS_MESSAGE, str(params))
 
@@ -134,16 +131,7 @@ def main():
         #indicate that we are ready now...
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         for event in events:
-            
-            print("processing event: " + str(event) + "\nargs: " + str(event.args))
-
             process_event(event, assistant.device_id)
-            cmd = event.args
-            print("args: " + str(cmd))
-            if "name".lower() in str(cmd).lower():
-                assistant.stop_conversation()
-                say("You don't know my name", configData[constants.SAY_FILE_KEY])
-                print("found stuff")
 
 if __name__ == '__main__':
     try:

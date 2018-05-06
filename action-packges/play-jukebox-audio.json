@@ -1,12 +1,12 @@
 {
     "manifest": {
-        "displayName": "Play JukeBox Audio",
-        "invocationName": "Play JukeBox Audio",
-        "category": "MUSIC"
+        "displayName": "Juke Box",
+        "invocationName": "Juke Box",
+        "category": "PRODUCTIVITY"
     },
     "actions": [
         {
-            "name": "com.mypi.actions.play_jukebox",
+            "name": "com.acme.actions.play_jukebox",
             "availability": {
                 "deviceClasses": [
                     {
@@ -15,7 +15,7 @@
                 ]
             },
             "intent": {
-                "name": "com.mypi.intents.play_jukebox",
+                "name": "com.acme.intents.play_jukebox",
                 "parameters": [
                     {
                         "name": "number",
@@ -28,14 +28,7 @@
                 ],
                 "trigger": {
                     "queryPatterns": [
-                        "play song number $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "play song $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "start song number $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "start song $SchemaOrg_Number:number on juke box in $LocationType:location",
-                        "on juke box in $LocationType:location play song number $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location play song $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location start song number $SchemaOrg_Number:number",
-                        "on juke box in $LocationType:location start song $SchemaOrg_Number:number"
+                        "jukebox song number $SchemaOrg_Number:number in $LocationType:location"
                     ]
                 }
             },
@@ -45,15 +38,15 @@
                         "items": [
                             {
                                 "simpleResponse": {
-                                    "textToSpeech": "Playing the $number on juke box in $location.raw"
+                                    "textToSpeech": "jukeboxing song number $number in $location.raw"
                                 }
                             },
                             {
                                 "deviceExecution": {
-                                    "command": "com.mypi.commands.play_jukebox",
+                                    "command": "com.acme.commands.play_jukebox",
                                     "params": {
-                                        "location": "$location",
-                                        "number": "$number"
+                                        "number": "$number",
+                                        "locationkey": "$location"
                                     }
                                 }
                             }
