@@ -6,6 +6,64 @@
     },
     "actions": [
         {
+            "name": "com.mypi.action.jukebox_volume",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.mypi.intents.jukebox_volume",
+                "parameters": [
+                    {
+                        "name": "step",
+                        "type": "StepIntervals"
+                    },
+                    {
+                        "name": "operation",
+                        "type": "VolumeOperations"
+                    },
+                    {
+                        "name": "location",
+                        "type": "LocationType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "jukebox $VolumeOperations:operation volume $StepIntervals:step in $LocationType:location",
+                        "in $LocationType:location jukebox $VolumeOperations:operation volume $StepIntervals:step",
+                        "jukebox volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
+                        "in $LocationType:location jukebox volume $VolumeOperations:operation $StepIntervals:step"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "jukebox volume $operation.raw in $location.raw by $step.raw"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.mypi.commands.jukebox_volume",
+                                    "params": {
+                                        "stepKey": "$step",
+                                        "opeartionKey" : "$operation",
+                                        "locationkey": "$location"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
             "name": "com.mypi.action.play_jukebox",
             "availability": {
                 "deviceClasses": [
@@ -78,6 +136,7 @@
                 "trigger": {
                     "queryPatterns": [
                         "jukebox stop in $LocationType:location",
+                        "stop jukebox in $LocationType:location",
                         "in $LocationType:location stop jukebox",
                         "jukebox stop at $LocationType:location",
                         "at $LocationType:location jukebox stop"
@@ -126,6 +185,7 @@
                 "trigger": {
                     "queryPatterns": [
                         "jukebox pause in $LocationType:location",
+                        "pause jukebox in $LocationType:location",
                         "in $LocationType:location pause jukebox",
                         "jukebox pause at $LocationType:location",
                         "at $LocationType:location jukebox pause"
@@ -174,6 +234,7 @@
                 "trigger": {
                     "queryPatterns": [
                         "jukebox resume in $LocationType:location",
+                        "resume jukebox in $LocationType:location",
                         "in $LocationType:location resume jukebox",
                         "jukebox resume at $LocationType:location",
                         "at $LocationType:location jukebox resume"
@@ -223,6 +284,79 @@
                         "livingroom",
                         "there",
                         "next room"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "$VolumeOperations",
+            "entities": [
+                {
+                    "key": "increase",
+                    "synonyms": [
+                        "up",
+                        "increase",
+                        "high",
+                        "increment"
+                    ]
+                },
+                {
+                    "key": "decrease",
+                    "synonyms": [
+                        "down",
+                        "decrease",
+                        "low",
+                        "decrement"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "$StepIntervals",
+            "entities": [
+                {
+                    "key": "small",
+                    "synonyms": [
+                        "little",
+                        "little bit",
+                        "small",
+                        "a little",
+                        "less",
+                        "a bit"
+                    ]
+                },
+                {
+                    "key": "large",
+                    "synonyms": [
+                        "a lot",
+                        "quite a bit",
+                        "quite a lot",
+                        "more",
+                        "big"
+                    ]
+                },
+                {
+                    "key": "max",
+                    "synonyms": [
+                        "max",
+                        "maximum",
+                        "full",
+                        "all",
+                        "complete",
+                        "total",
+                        "loud"
+                    ]
+                },
+                {
+                    "key": "min",
+                    "synonyms": [
+                        "min",
+                        "minimum",
+                        "nothing",
+                        "zero",
+                        "no sound",
+                        "silent",
+                        "mute"
                     ]
                 }
             ]

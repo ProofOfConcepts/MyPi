@@ -41,6 +41,18 @@ class JukeBoxRequest:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
             self.getData(url)
 
+    
+    def playSong(self, songNumber, url):
+        data = self.getPlayerRequestData(0, songNumber)
+        self.postData(url, data)
+
+    def getPlayerRequestData(self, requestType, identifier):
+        data = {
+            "RequestType":requestType,
+            "Identifier":identifier
+        }
+        return data
+
     def getData(self, url):
         print("getting from: " + url)
         headers = {"Content-Type" : "application/json"}
@@ -55,16 +67,6 @@ class JukeBoxRequest:
         print(response.text)
         return response.text
 
-    def playSong(self, songNumber, url):
-        data = self.getPlayerRequestData(0, songNumber)
-        self.postData(url, data)
-
-    def getPlayerRequestData(self, requestType, identifier):
-        data = {
-            "RequestType":requestType,
-            "Identifier":identifier
-        }
-        return data
     def __init__(self):
         file_path = os.path.dirname(os.path.realpath(__file__)) + "/jukebox-config.json"
         print(constants.CONFIG_FILE_READ_PATH_MESSAGE + file_path)

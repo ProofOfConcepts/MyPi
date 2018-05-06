@@ -24,6 +24,9 @@ JUKEBOXES_PLAY_COMMAND = "com.mypi.commands.play_jukebox"
 JUKEBOXES_PAUSE_COMMAND = "com.mypi.commands.pause_jukebox"
 JUKEBOXES_RESUME_COMMAND = "com.mypi.commands.resume_jukebox"
 JUKEBOXES_STOP_COMMAND = "com.mypi.commands.stop_jukebox"
+JUKEBOXES_VOLUME_COMMAND = "com.mypi.commands.jukebox_volume"
+JUKEBOXES_VOLUME_SMALL_STEP = 5
+JUKEBOXES_VOLUME_LARGE_STEP = 10
 
 
 CONVERSATION_TURN_STARTED_MESSAGE = "I am here..."
