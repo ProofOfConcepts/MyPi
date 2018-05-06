@@ -153,6 +153,54 @@
                     }
                 }
             }
+        },
+        {
+            "name": "com.acme.actions.resume_jukebox",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.acme.intents.resume_jukebox",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "LocationType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "jukebox resume in $LocationType:location",
+                        "in $LocationType:location resume jukebox",
+                        "jukebox resume at $LocationType:location",
+                        "at $LocationType:location jukebox resume"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "resuming jukebox in $location.raw"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.acme.commands.resume_jukebox",
+                                    "params": {
+                                        "locationkey": "$location"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
         }
     ],
     "types": [
@@ -160,7 +208,7 @@
             "name": "$LocationType",
             "entities": [
                 {
-                    "key": "zero",
+                    "key": "local",
                     "synonyms": [
                         "bedroom",
                         "bed room",

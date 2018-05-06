@@ -53,6 +53,7 @@ def process_device_actions(event, device_id):
 
 def process_event(event, device_id):
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
+        myJukeBox.jukeBoxOtherRequest("com.acme.commands.pause_jukebox", "local")
         playWavFile(dir_path + configData[constants.LISTENING_AUDIO_FILE_KEY])
         print(constants.CONVERSATION_TURN_STARTED_MESSAGE)
 
@@ -61,6 +62,7 @@ def process_event(event, device_id):
     if (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
             event.args and not event.args[constants.EVENT_ARGS_WITH_FOLLOW_ON_TURN]):
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
+        myJukeBox.jukeBoxOtherRequest("com.acme.commands.resume_jukebox", "local")
         print(constants.CONVERSATION_TURN_FINISHED_MESSAGE)
     
     if event.type == EventType.ON_DEVICE_ACTION:

@@ -26,6 +26,9 @@ class JukeBoxRequest:
                 if requestType == "com.acme.commands.pause_jukebox":
                     data = self.getPlayerRequestData(1, -1)
                     self.postData(url, data)
+                if requestType == "com.acme.commands.resume_jukebox":
+                    data = self.getPlayerRequestData(3, -1)
+                    self.postData(url,data)
     
     def postData(self, url, data):
         print("posting to: " + url)
