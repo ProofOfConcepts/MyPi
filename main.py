@@ -1,5 +1,12 @@
 #!usr/bin/env python  
-#coding=utf-8  
+#coding=utf-8
+
+#what song is playing
+#what is the volume
+#how much time till song finishes
+#what is the volume level
+#where are songs playing
+#complete status of all players in house
 
 from __future__ import print_function
 
