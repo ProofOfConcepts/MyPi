@@ -47,3 +47,4 @@ def processCommand(command, params):
         myJukeBox.jukeBoxOtherRequest(command, params["locationkey"])
     if command == constants.JUKEBOXES_VOLUME_COMMAND:
         print("Adjusting Volume...")
+        myJukeBox.jukeboxVolumeRequest(params["stepKey"], params["opeartionKey"], params["locationkey"])

@@ -12,6 +12,7 @@
         }
     ],
     "playerrequestendpoint" : "/api/Player/Request",
+    "playercontrolrequestendpoint" : "/api/Player/Control",
     "conversationstartedendpoint" : "/api/Player/ConversationStarted",
     "conversationfinishedendpoint" : "/api/Player/ConversationFinished"
 }

@@ -33,7 +33,9 @@
                 "trigger": {
                     "queryPatterns": [
                         "jukebox $VolumeOperations:operation volume $StepIntervals:step in $LocationType:location",
+                        "jukebox $StepIntervals:step volume $VolumeOperations:operation in $LocationType:location",
                         "in $LocationType:location jukebox $VolumeOperations:operation volume $StepIntervals:step",
+                        "in $LocationType:location jukebox $StepIntervals:step volume $VolumeOperations:operation",
                         "jukebox volume $VolumeOperations:operation $StepIntervals:step in $LocationType:location",
                         "in $LocationType:location jukebox volume $VolumeOperations:operation $StepIntervals:step"
                     ]

@@ -18,7 +18,7 @@ class JukeBoxRequest:
     def jukeBoxOtherRequest(self, requestType, host):
         for jukebox in self.data["jukeboxes"]:
             if jukebox["name"] == host:
-                print("host found...\nstopping on host: " + host)
+                print("host found...\nProcessing on host: " + host)
                 url= jukebox["host"] + self.data[constants.JUKEBOXES_PLAYERREQUEST_ENDPOINT_KEY]
                 if requestType == constants.JUKEBOXES_STOP_COMMAND:
                     data = self.getPlayerRequestData(2, -1)
@@ -41,7 +41,34 @@ class JukeBoxRequest:
             url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
             self.getData(url)
 
+    def jukeboxVolumeRequest(self, amount, operation, host):
+        for jukebox in self.data["jukeboxes"]:
+            if jukebox["name"] == host:
+                print("host found...\nProcessing volume on host: " + host)
+                url= jukebox["host"] + self.data[constants.JUKEBOXES_PLAYERCONTROLREQUEST_ENDPOINT_KEY]
+                step = 0
+                if amount == constants.JUKEBOXES_SMALL_STEP:
+                    step = 5
+                if amount == constants.JUKEBOXES_LARGE_STEP:
+                    step = 10
+                if amount == constants.JUKEBOXES_MAX_STEP:
+                    step = 100
+                if amount == constants.JUKEBOXES_MIN_STEP:
+                    step = 0
+                if operation == constants.JUKEBOXES_VOLUMEDOWN_OPERATION:
+                    step = step * -1
+                data = self.getPlayerControlRequestData(5, step)
+                print("sending data:\n" + data)
+                response = self.postData(url, data)
+                print(response)
     
+    def getPlayerControlRequestData(self, requestType, requestParam):
+        data = {
+            "controlRequest": requestType,
+            "requestData": requestParam
+        }
+        return data
+
     def playSong(self, songNumber, url):
         data = self.getPlayerRequestData(0, songNumber)
         self.postData(url, data)
