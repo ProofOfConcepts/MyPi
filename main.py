@@ -134,9 +134,15 @@ def main():
         #indicate that we are ready now...
         playWavFile(dir_path + configData[constants.HOTWORD_WAITING_AUDIO_FILE_KEY])
         for event in events:
+            
             print("processing event: " + str(event) + "\nargs: " + str(event.args))
 
             process_event(event, assistant.device_id)
+            cmd = event.args
+            if "name".lower() in str(cmd).lower():
+                assistant.stop_conversation()
+                say("You don't know my name", configData[constants.SAY_FILE_KEY])
+                print("found stuff")
 
 if __name__ == '__main__':
     try:
