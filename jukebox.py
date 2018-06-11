@@ -33,13 +33,19 @@ class JukeBoxRequest:
 
     def jukeBoxConversationStarted(self):
         for jukebox in self.data["jukeboxes"]:
-            url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY]
-            self.getData(url)
+            try:
+                url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_START_ENDPOINT_KEY]
+                self.getData(url)
+            except:
+                print("jukeBoxConversationStarted: Looks like {0} is not available...".format(jukebox["host"]))
 
     def jukeBoxConversationFinished(self):
         for jukebox in self.data["jukeboxes"]:
-            url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
-            self.getData(url)
+            try:
+                url = jukebox["host"] + self.data[constants.JUKEBOXES_CONVERSATION_END_ENDPOINT_KEY]
+                self.getData(url)
+            except:
+                print("jukeBoxConversationFinished: Looks like {0} is not available...".format(jukebox["host"]))
 
     def jukeboxVolumeRequest(self, amount, operation, host):
         for jukebox in self.data["jukeboxes"]:
